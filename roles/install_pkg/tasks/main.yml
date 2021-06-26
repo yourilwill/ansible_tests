@@ -1,0 +1,19 @@
+- name: install common packages
+  package:
+    name: "{{ item }}"
+  with_items:
+    - "{{ common_packages }}"
+
+- name: install centos packages
+  package:
+    name: "{{ item }}"
+  with_items:
+    - "{{ CentOS_packages }}"
+  when: ansible_distribution == "CentOS"
+
+- name: install ubuntu packages
+  package:
+    name: "{{ item }}"
+  with_items:
+    - "{{ Ubuntu_packages }}"
+  when: ansible_distribution == "Ubuntu"

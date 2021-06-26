@@ -1,0 +1,15 @@
+- include_vars: "{{ansible_distribution}}{{ansible_distribution_major_version}}.yml"
+
+- name: install zabbix-agent
+  include_tasks: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+
+- name: transfer zabbix config file
+  template:
+    src: zabbix_agentd.conf.j2
+    dest: /etc/zabbix/zabbix_agentd.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+  notify:
+    - Restart zabbix-agent

@@ -1,0 +1,6 @@
+- name: install zabbix-agent
+  hosts: zabbix_agent
+  become: yes
+  tasks:
+    - include_role: 
+        name: zabbix-agent

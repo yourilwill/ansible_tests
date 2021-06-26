@@ -1,0 +1,26 @@
+- name: install EPEL 
+  yum:
+    name: epel-release
+
+- name: disable DNS settings in Network Manager.
+  template:
+    src: centos.NetworkManager.conf.j2
+    dest: /etc/NetworkManager/NetworkManager.conf
+    mode: '0644'
+    owner: root
+    group: root
+    backup: yes
+  notify:
+    - Restart NetworkManager
+
+- name: configure DNS settings of /etc/resolv.conf
+  template:
+    src: centos.resolv.conf.j2
+    dest: /etc/resolv.conf
+    mode: '0644'
+    owner: root
+    group: root
+    backup: yes
+    #  notify:
+    #    - Restart NetworkManager
+

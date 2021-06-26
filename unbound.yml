@@ -1,0 +1,11 @@
+- name: install and/or release unbound
+  hosts: unbound
+  become: yes
+  roles:
+    - name: install_unbound
+      tags:
+        - build
+        - never
+    - name: release_unbound
+      tags:
+        - always

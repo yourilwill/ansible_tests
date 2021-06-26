@@ -1,0 +1,6 @@
+- name: install mysql8.0
+  hosts: mysql80
+  become: yes
+  tasks:
+    - include_role:
+        name: mysql80

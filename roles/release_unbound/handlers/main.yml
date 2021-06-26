@@ -1,0 +1,11 @@
+- name: Reload unbound
+  service:
+    name: unbound
+    state: reloaded
+  become: yes
+
+- name: Restart unbound
+  service:
+    name: unbound
+    state: restarted
+  become: yes

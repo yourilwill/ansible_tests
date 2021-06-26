@@ -1,0 +1,35 @@
+- include_vars: "{{ansible_distribution}}{{ansible_distribution_major_version}}.yml"
+
+- name: install mysql80
+  include_tasks: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+
+- name: install necessary libraries
+  yum:
+    name: "{{ mysql_libraries }}"
+    state: present
+
+- name: transfer my.cnf
+  template:
+    src: my.cnf.j2
+    dest: /etc/my.cnf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+  notify:
+    - Restart mysqld
+
+- name: get root password
+  shell: "grep 'temporary password' /var/log/mysqld.log | sed -s 's/.*root@localhost: //'"
+  register: root_password
+  changed_when: False
+
+- name: update temporary root password
+  command: mysql --user root --password={{ root_password.stdout }} --connect-expired-password --execute="alter user 'root'@'localhost' identified by 'MySQL8.0';"
+  register: change_root_result
+  changed_when: "change_root_result.rc == 0 and 'Access dinied' not in change_root_result.stderr"
+  failed_when: False
+
+- name: debug result
+  debug:
+    msg: "{{ change_root_result }}"

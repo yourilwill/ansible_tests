@@ -1,0 +1,24 @@
+# {{ ansible_managed }}
+
+server:
+  verbosity: 1
+  interface: 0.0.0.0
+
+  do-ip4: yes
+  do-ip6: no
+
+{% for ac in access_control %}
+  access-control: {{ac}}
+{% endfor %}
+
+  private-domain: "youril.local"
+
+  local-zone: "youril.local" redirect
+{% for ld in local_data %}
+  local-data: "{{ld}}"
+{% endfor %}
+
+forward-zone:
+  name: "."
+  forward-addr: 8.8.8.8
+  forward-addr: 8.8.4.4

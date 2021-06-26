@@ -1,0 +1,21 @@
+- name: configure unbound.conf
+  template:
+    src: ubuntu.unbound.conf.j2
+    dest: /etc/unbound/unbound.conf
+    mode: '0644'
+    owner: root
+    group: root
+    backup: yes
+  notify:
+    - Reload unbound
+
+- name: configure main.conf
+  template:
+    src: main.conf.j2
+    dest: /etc/unbound/unbound.conf.d/main.conf
+    mode: '0644'
+    owner: root
+    group: root
+    backup: yes
+  notify:
+    - Reload unbound

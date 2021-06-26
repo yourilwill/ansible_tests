@@ -1,0 +1,9 @@
+- name: add mysql8.0 repository
+  yum:
+    name: "{{ mysql80_repository }}"
+
+- name: install mysql8.0
+  yum:
+    name: mysql-server
+    update_cache: true
+    state: latest

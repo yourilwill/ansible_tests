@@ -1,0 +1,7 @@
+common_packages:
+  - traceroute
+  - vim
+CentOS_packages:
+  - nc
+  - unzip
+Ubuntu_packages:

@@ -1,0 +1,13 @@
+- name: download zabbix package file
+  get_url:
+    url: "{{ package_url }}"
+    dest: "{{ package_path }}"
+
+- name: install zabbix package
+  apt: deb="{{ package_path }}"
+
+- name: install zabbix-agent
+  apt:
+    name: zabbix-agent
+    state: latest
+    update_cache: yes

@@ -1,0 +1,25 @@
+# {{ ansible_managed }}
+
+############ GENERAL PARAMETERS #################
+
+### Option: PidFile
+PidFile=/var/run/zabbix/zabbix_agentd.pid
+
+### Option: LogFile
+LogFile=/var/log/zabbix/zabbix_agentd.log
+
+### Option: LogFileSize
+LogFileSize=0
+
+### Option: Server
+Server=192.168.33.11
+
+### Option: ServerActive
+ServerActive=192.168.33.11:10051
+
+### Option: Hostname
+Hostname={{ ansible_hostname }}
+
+### Option: Include
+Include=/etc/zabbix/zabbix_agentd.d/*.conf
+

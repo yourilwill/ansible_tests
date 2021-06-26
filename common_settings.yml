@@ -1,0 +1,10 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Set timezone to Asia/Tokyo
+      timezone:
+        name: Asia/Tokyo
+    - include_role:
+        name: install_pkg
+    - include_role:
+        name: configure_dns_settings

@@ -1,0 +1,22 @@
+#- name: disable SELinux
+#  selinux:
+#    state: disabled
+
+- name: download zabbix package file
+  yum:
+    name: "{{ zabbix_rpm }}"
+
+- name: install zabbix-agent
+  yum: 
+    name: zabbix-agent
+    enablerepo: zabbix
+    update_cache: true
+    state: latest
+
+- name: set firewalld for zabbix-agent
+  firewalld:
+    zone: public
+    permanent: yes
+    state: enabled
+    immediate: yes
+    service: zabbix-agent

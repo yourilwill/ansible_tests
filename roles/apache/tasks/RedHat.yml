@@ -1,0 +1,16 @@
+- name: install EPEL 
+  yum:
+    name: epel-release
+
+- name: install httpd
+  yum:
+    name: httpd
+    state: present
+  become: true
+
+- name: run httpd
+  systemd:
+    name: httpd
+    state: started
+  notify:
+    - Restart httpd

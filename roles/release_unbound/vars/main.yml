@@ -1,0 +1,14 @@
+access_control:
+  - 0.0.0.0/0 refuse
+  - 127.0.0.0/8 allow
+  - 10.0.0.0/8 allow
+  - 172.16.0.0/12 allow
+  - 192.168.0.0/16 allow
+local_data:
+  - youril.local. 10800 IN A 192.168.33.21
+  - youril.local. 10800 IN SOA dns. nobody.invalid. 1 3600 1200 604800 10800
+  - target. 10800 IN A 192.168.33.11
+  - target2. 10800 IN A 192.168.33.9
+  - dns. 10800 IN A 192.168.33.21
+  - mysql80. 10800 IN A 192.168.33.31
+  - mysql802. 10800 IN A 192.168.33.32

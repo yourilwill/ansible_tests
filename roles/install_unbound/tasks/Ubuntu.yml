@@ -1,0 +1,11 @@
+- name: install unbound
+  apt:
+    name: unbound
+  become: true
+
+- name: run unbound
+  systemd:
+    name: unbound
+    state: started
+  notify:
+    - Restart unbound
