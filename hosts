@@ -1,3 +1,10 @@
+[centos:children]
+centos7
+
+[ubuntu:children]
+ubuntu18
+ubuntu20
+
 [centos7]
 192.168.33.31 #mysql80
 192.168.33.32 #mysql802
@@ -12,6 +19,12 @@
 192.168.33.9  #target2
 192.168.33.11 #target
 192.168.33.21 #dns
+
+[ubuntu20]
+192.168.33.41 #mail
+
+[mail]
+192.168.33.41 #mail
 
 [unbound]
 192.168.33.21 #dns
