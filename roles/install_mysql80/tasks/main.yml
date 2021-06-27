@@ -1,0 +1,20 @@
+- include_vars: "{{ansible_distribution}}{{ansible_distribution_major_version}}.yml"
+
+- name: install mysql80
+  include_tasks: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+
+- name: install necessary libraries
+  yum:
+    name: "{{ mysql_libraries }}"
+    state: present
+
+- name: transfer my.cnf
+  template:
+    src: my.cnf.j2
+    dest: /etc/my.cnf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+  notify:
+    - Restart mysqld
