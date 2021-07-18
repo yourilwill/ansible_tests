@@ -1,4 +1,5 @@
 # {{ ansible_managed }}
+{% set server_id = ansible_eth1.ipv4.address | regex_replace('\.', '') %}
 
 [mysqld]
 default-authentication-plugin=mysql_native_password
@@ -6,3 +7,17 @@ datadir=/var/lib/mysql
 socket=/var/lib/mysql/mysql.sock
 log-error=/var/log/mysqld.log
 pid-file=/var/run/mysqld/mysqld.pid
+
+{% if 'mysql80_source' in group_names %}
+# for replication (Source)
+log-bin=db001-bin
+server-id={{ server_id }}
+#rpl_semi_sync_master_enabled=1
+#rpl_semi_sync_master_timeout=10000 # 10 seconds
+
+{% elif 'mysql80_replica' in group_names %}
+# for replication (Replica)
+server-id={{ server_id }}
+#rpl_semi_sync_slave_enabled=1
+
+{% endif %}

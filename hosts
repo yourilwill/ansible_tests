@@ -10,8 +10,14 @@ ubuntu20
 192.168.33.32 #mysql802
 192.168.33.33 #mysql803
 
-[mysql80]
+[mysql80:children]
+mysql80_source
+mysql80_replica
+
+[mysql80_source]
 192.168.33.31 #mysql80
+
+[mysql80_replica]
 192.168.33.32 #mysql802
 192.168.33.33 #mysql803
 
