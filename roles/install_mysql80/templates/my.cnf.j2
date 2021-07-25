@@ -5,12 +5,21 @@
 default-authentication-plugin=mysql_native_password
 datadir=/var/lib/mysql
 socket=/var/lib/mysql/mysql.sock
-log-error=/var/log/mysqld.log
 pid-file=/var/run/mysqld/mysqld.pid
+
+# log file settings
+log-output=FILE
+log_timestamps=SYSTEM
+general_log=0 # disabled
+general_log_file=/var/lib/mysql/{{ ansible_hostname }}-general.log
+slow-query-log=1
+slow_query_log_file=/var/lib/mysql/{{ ansible_hostname }}-slow.log
+long_query_time=5 # 5 seconds
+log-error=/var/log/mysqld.log
 
 {% if 'mysql80_source' in group_names %}
 # for replication (Source)
-log-bin=db001-bin
+log-bin={{ ansible_hostname }}-bin.log
 server-id={{ server_id }}
 #rpl_semi_sync_master_enabled=1
 #rpl_semi_sync_master_timeout=10000 # 10 seconds
@@ -19,5 +28,6 @@ server-id={{ server_id }}
 # for replication (Replica)
 server-id={{ server_id }}
 #rpl_semi_sync_slave_enabled=1
+log_slave_updates=1
 
 {% endif %}
