@@ -5,42 +5,40 @@ centos7
 ubuntu18
 
 [centos7]
-192.168.33.31 #mysql80
-192.168.33.32 #mysql802
-192.168.33.33 #mysql803
-192.168.33.41 #mysql8011
-192.168.33.42 #mysql8012
-192.168.33.43 #mysql8013
+mysql80
+mysql802
+mysql803
+mysql8011
+mysql8012
+mysql8013
 
 [mysql80:children]
 mysql80_source
 mysql80_replica
 
 [mysql80_source]
-192.168.33.31 #mysql80
-192.168.33.41 #mysql8011
+mysql80
+mysql8011
 
 [mysql80_replica]
-192.168.33.32 #mysql802
-192.168.33.33 #mysql803
-192.168.33.42 #mysql8012
-192.168.33.43 #mysql8013
+mysql802
+mysql803
+mysql8012
+mysql8013
 
 [ubuntu18]
-192.168.33.9  #target2
-192.168.33.11 #target
-192.168.33.21 #dns
+target2
+target
 
 [unbound]
 192.168.33.21 #dns
 
 [zabbix_agent]
-192.168.33.9  #target2
-192.168.33.11 #target
-192.168.33.21 #dns
-192.168.33.31 #mysql80
-192.168.33.32 #mysql802
-192.168.33.33 #mysql803
-192.168.33.41 #mysql8011
-192.168.33.42 #mysql8012
-192.168.33.43 #mysql8013
+target2
+target
+mysql80
+mysql802
+mysql803
+mysql8011
+mysql8012
+mysql8013
