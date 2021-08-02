@@ -3,12 +3,14 @@ centos7
 
 [ubuntu:children]
 ubuntu18
-ubuntu20
 
 [centos7]
 192.168.33.31 #mysql80
 192.168.33.32 #mysql802
 192.168.33.33 #mysql803
+192.168.33.41 #mysql8011
+192.168.33.42 #mysql8012
+192.168.33.43 #mysql8013
 
 [mysql80:children]
 mysql80_source
@@ -16,21 +18,18 @@ mysql80_replica
 
 [mysql80_source]
 192.168.33.31 #mysql80
+192.168.33.41 #mysql8011
 
 [mysql80_replica]
 192.168.33.32 #mysql802
 192.168.33.33 #mysql803
+192.168.33.42 #mysql8012
+192.168.33.43 #mysql8013
 
 [ubuntu18]
 192.168.33.9  #target2
 192.168.33.11 #target
 192.168.33.21 #dns
-
-[ubuntu20]
-192.168.33.41 #mail
-
-[mail]
-192.168.33.41 #mail
 
 [unbound]
 192.168.33.21 #dns
@@ -42,3 +41,6 @@ mysql80_replica
 192.168.33.31 #mysql80
 192.168.33.32 #mysql802
 192.168.33.33 #mysql803
+192.168.33.41 #mysql8011
+192.168.33.42 #mysql8012
+192.168.33.43 #mysql8013
