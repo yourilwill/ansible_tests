@@ -3,6 +3,7 @@ centos7
 
 [ubuntu:children]
 ubuntu18
+ubuntu20
 
 [centos7]
 mysql80
@@ -29,6 +30,9 @@ mysql8013
 [ubuntu18]
 target2
 target
+
+[ubuntu20]
+mail01
 
 [unbound]
 192.168.33.21 #dns
