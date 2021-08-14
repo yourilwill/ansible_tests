@@ -8,11 +8,12 @@ local_data:
   - youril.local. 10800 IN A 192.168.33.21
   - youril.local. 10800 IN SOA dns. nobody.invalid. 1 3600 1200 604800 10800
   - target. 10800 IN A 192.168.33.11
+  - cfgm. 10800 IN A 192.168.33.11
   - target2. 10800 IN A 192.168.33.9
   - dns. 10800 IN A 192.168.33.21
-  - mysql80. 10800 IN A 192.168.33.31
-  - mysql802. 10800 IN A 192.168.33.32
-  - mysql803. 10800 IN A 192.168.33.33
+  - mysql8001. 10800 IN A 192.168.33.31
+  - mysql8002. 10800 IN A 192.168.33.32
+  - mysql8003. 10800 IN A 192.168.33.33
   - mysql8011. 10800 IN A 192.168.33.41
   - mysql8012. 10800 IN A 192.168.33.42
   - mysql8013. 10800 IN A 192.168.33.43
