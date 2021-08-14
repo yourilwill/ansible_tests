@@ -6,9 +6,9 @@ ubuntu18
 ubuntu20
 
 [centos7]
-mysql80
-mysql802
-mysql803
+mysql8001
+mysql8002
+mysql8003
 mysql8011
 mysql8012
 mysql8013
@@ -18,12 +18,12 @@ mysql80_source
 mysql80_replica
 
 [mysql80_source]
-mysql80
+mysql8001
 mysql8011
 
 [mysql80_replica]
-mysql802
-mysql803
+mysql8002
+mysql8003
 mysql8012
 mysql8013
 
@@ -40,9 +40,9 @@ mail01
 [zabbix_agent]
 target2
 target
-mysql80
-mysql802
-mysql803
+mysql8001
+mysql8002
+mysql8003
 mysql8011
 mysql8012
 mysql8013
