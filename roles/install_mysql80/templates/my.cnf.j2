@@ -10,6 +10,9 @@ pid-file=/var/run/mysqld/mysqld.pid
 # log file settings
 log-output=FILE
 log_timestamps=SYSTEM
+log-bin={{ ansible_hostname }}-bin.log
+sync_binlog=1
+innodb_flush_log_at_trx_commit=1
 general_log=0 # disabled
 general_log_file=/var/lib/mysql/{{ ansible_hostname }}-general.log
 slow-query-log=1
@@ -17,16 +20,15 @@ slow_query_log_file=/var/lib/mysql/{{ ansible_hostname }}-slow.log
 long_query_time=5 # 5 seconds
 log-error=/var/log/mysqld.log
 
+server-id={{ server_id }}
+
 {% if 'mysql80_source' in group_names %}
 # for replication (Source)
-log-bin={{ ansible_hostname }}-bin.log
-server-id={{ server_id }}
 #rpl_semi_sync_master_enabled=1
 #rpl_semi_sync_master_timeout=10000 # 10 seconds
 
 {% elif 'mysql80_replica' in group_names %}
 # for replication (Replica)
-server-id={{ server_id }}
 #rpl_semi_sync_slave_enabled=1
 log_slave_updates=1
 
