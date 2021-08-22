@@ -33,6 +33,7 @@ target
 
 [ubuntu20]
 mail01
+dbmon01
 
 [unbound]
 192.168.33.21 #dns
