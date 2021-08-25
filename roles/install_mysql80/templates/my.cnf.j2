@@ -2,34 +2,40 @@
 {% set server_id = ansible_eth1.ipv4.address | regex_replace('\.', '') %}
 
 [mysqld]
-default-authentication-plugin=mysql_native_password
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
-pid-file=/var/run/mysqld/mysqld.pid
+default-authentication-plugin  = mysql_native_password
+datadir                        = /var/lib/mysql
+socket                         = /var/lib/mysql/mysql.sock
+pid-file                       = /var/run/mysqld/mysqld.pid
 
 # log file settings
-log-output=FILE
-log_timestamps=SYSTEM
-log-bin={{ ansible_hostname }}-bin.log
-sync_binlog=1
-innodb_flush_log_at_trx_commit=1
-general_log=0 # disabled
-general_log_file=/var/lib/mysql/{{ ansible_hostname }}-general.log
-slow-query-log=1
-slow_query_log_file=/var/lib/mysql/{{ ansible_hostname }}-slow.log
-long_query_time=5 # 5 seconds
-log-error=/var/log/mysqld.log
+log-output                     = FILE
+log_timestamps                 = SYSTEM
+log-bin                        = {{ ansible_hostname }}-bin.log
+sync_binlog                    = 1
+binlog_rows_query_log_events   = ON
+binlog_expire_logs_seconds     = 2592000 # 30 days
+innodb_flush_log_at_trx_commit = 1
+general_log                    = 0 # disabled
+general_log_file               = /var/lib/mysql/{{ ansible_hostname }}-general.log
+slow-query-log                 = 1
+slow_query_log_file            = /var/lib/mysql/{{ ansible_hostname }}-slow.log
+long_query_time                = 5 # 5 seconds
+log-error                      = /var/log/mysqld.log
 
-server-id={{ server_id }}
+# for replication (Common)
+server-id                      = {{ server_id }}
+enforce_gtid_consistency       = ON
+gtid_mode                      = ON
+relay_log_recovery             = ON
+report_host                    = {{ ansible_hostname }}
+replica_parallel_type          = LOGICAL_CLOCK
 
-{% if 'mysql80_source' in group_names %}
 # for replication (Source)
-#rpl_semi_sync_master_enabled=1
-#rpl_semi_sync_master_timeout=10000 # 10 seconds
+#rpl_semi_sync_master_enabled   = 1
+#rpl_semi_sync_master_timeout   = 10000 # 10 seconds
 
-{% elif 'mysql80_replica' in group_names %}
 # for replication (Replica)
-#rpl_semi_sync_slave_enabled=1
-log_slave_updates=1
-
-{% endif %}
+#rpl_semi_sync_slave_enabled    = 1
+#log_replica_updates            = 1
+#read_only                      = 1
+#super_read_only                = 1
