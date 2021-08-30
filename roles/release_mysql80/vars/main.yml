@@ -1,0 +1,18 @@
+mysql_user:
+  - name: "root"
+    host: "%"
+    password: "*6A7C9CB4AEA654747E474B8E076B6C89439D5103"
+    encrypted: "yes"
+    priv: "*.*:ALL,GRANT"
+    login_user: "root"
+    login_password: "MySQL8.0"
+    state: "present"
+
+  - name: "repl"
+    host: "%"
+    password: "*6A7C9CB4AEA654747E474B8E076B6C89439D5103"
+    encrypted: "yes"
+    priv: "*.*:REPLICATION SLAVE"
+    login_user: "root"
+    login_password: "MySQL8.0"
+    state: "present"

@@ -1,9 +1,8 @@
 - name: install mysql8.0
   hosts: mysql80
   become: yes
-  tasks:
-    - include_role:
-        name: install_mysql80
-  post_tasks:
-    - include_role:
-        name: mysql_change_temporary_password
+  roles:
+    - name: install_mysql80
+    - name: release_mysql80
+      tags:
+        - release

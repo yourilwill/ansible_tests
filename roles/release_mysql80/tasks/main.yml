@@ -1,0 +1,49 @@
+- name: transfer my.cnf
+  template:
+    src: my.cnf.j2
+    dest: /etc/my.cnf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+  notify:
+    - Restart mysqld
+
+- name: check whether necessary users exist
+  shell: 'mysql -u root -pMySQL8.0 -e "select user,host from mysql.user;" | egrep "{{ item.name }}\s+{{ item.host }}"'
+  register: user_check_result
+  with_items: "{{ mysql_user }}"
+  when: item.state == "present"
+  changed_when: no
+  failed_when: no
+
+- name: create mysql user
+  mysql_user:
+    name: "{{ item.item.name }}"
+    host: "{{ item.item.host }}"
+    password: "{{ item.item.password }}"
+    encrypted: "{{ item.item.encrypted }}"
+    priv: "{{ item.item.priv }}"
+    login_user: "{{ item.item.login_user }}"
+    login_password: "{{ item.item.login_password }}"
+    state: "{{ item.item.state }}"
+  with_items: "{{ user_check_result.results }}"
+  when: item.rc is defined and item.rc != 0
+
+- name: check whether unused users exist
+  shell: 'mysql -u root -pMySQL8.0 -e "select user,host from mysql.user;" | egrep "{{ item.name }}\s+{{ item.host }}"'
+  register: user_check_result
+  with_items: "{{ mysql_user }}"
+  when: item.state == "absent"
+  changed_when: no
+  failed_when: no
+
+- name: delete mysql user
+  mysql_user:
+    name: "{{ item.item.name }}"
+    host: "{{ item.item.host }}"
+    state: "{{ item.item.state }}"
+    login_user: "{{ item.item.login_user }}"
+    login_password: "{{ item.item.login_password }}"
+  with_items: "{{ user_check_result.results }}"
+  when: item.rc is defined and item.rc == 0
