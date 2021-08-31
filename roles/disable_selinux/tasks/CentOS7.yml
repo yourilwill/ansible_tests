@@ -1,0 +1,10 @@
+- name: Put SELinux in permissive mode, logging actions that would be blocked.
+  selinux:
+    policy: targeted
+    state: permissive
+  register: selinux_result
+
+- name: check whether reboot needed.
+  debug:
+    var: selinux_result.reboot_required
+

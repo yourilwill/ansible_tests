@@ -4,7 +4,12 @@
     - name: Set timezone to Asia/Tokyo
       timezone:
         name: Asia/Tokyo
-    - include_role:
-        name: install_pkg
-    - include_role:
-        name: configure_dns_settings
+    - name: execute roles
+      include_role:
+        name: "{{ role }}"
+      loop:
+        - configure_dns_settings
+        - disable_selinux
+        - install_common_pkg
+      loop_control:
+        loop_var: role
