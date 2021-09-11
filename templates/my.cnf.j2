@@ -29,6 +29,7 @@ gtid_mode                      = ON
 relay_log_recovery             = ON
 report_host                    = {{ ansible_hostname }}
 replica_parallel_type          = LOGICAL_CLOCK
+skip-slave-start               = ON
 
 # for replication (Source)
 #rpl_semi_sync_master_enabled   = 1

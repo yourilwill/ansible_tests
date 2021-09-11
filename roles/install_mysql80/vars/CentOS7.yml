@@ -2,6 +2,3 @@ mysql80_repository: "https://dev.mysql.com/get/mysql80-community-release-el7-3.n
 mysql_libraries:
   - MySQL-python
   - mysql-shell
-firewalld_entries:
-  - { port: "3306", protocol: "tcp", state: "enabled", zone: "public" }
-  - { port: "33061", protocol: "tcp", state: "enabled", zone: "public" }

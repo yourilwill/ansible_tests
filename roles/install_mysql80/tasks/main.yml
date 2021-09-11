@@ -8,13 +8,42 @@
     name: "{{ mysql_libraries }}"
     state: present
 
+- name: transfer .my.cnf.org for local connection
+  template:
+    src: .my.cnf.org.j2
+    dest: /root/.my.cnf.org
+    owner: root
+    group: root
+    mode: '0600'
+    backup: no
+
+- name: transfer initial my.cnf
+  template:
+    src: my.cnf.j2
+    dest: /etc/my.cnf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
+- name: start MySQL server
+  service:
+    name: mysqld
+    state: started
+
 - name: get root password
   shell: "grep 'temporary password' /var/log/mysqld.log | sed -s 's/.*root@localhost: //'"
-  register: root_password
+  register: initial_root_password
   changed_when: False
 
 - name: update temporary root password
-  command: mysql --user root --password={{ root_password.stdout }} --connect-expired-password --execute="alter user 'root'@'localhost' identified by 'MySQL8.0';"
+  command: mysql --user root --password={{ initial_root_password.stdout }} --connect-expired-password --execute="alter user 'root'@'localhost' identified by 'MySQL8.0';"
   register: change_root_result
   changed_when: "change_root_result.rc == 0 and 'Access Dinied' not in change_root_result.stderr"
+  failed_when: False
+
+- name: install replication plugin
+  command: mysql --user root --password=MySQL8.0 --connect-expired-password --execute="INSTALL PLUGIN rpl_semi_sync_master SONAME 'semisync_master.so'; INSTALL PLUGIN rpl_semi_sync_slave SONAME 'semisync_slave.so';"
+  register: replication_plugin_result
+  changed_when: "replication_plugin_result.rc == 0"
   failed_when: False

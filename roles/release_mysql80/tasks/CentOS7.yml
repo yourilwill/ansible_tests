@@ -1,0 +1,10 @@
+- name: set firewalld for MySQL
+  firewalld:
+    immediate: yes
+    permanent: yes
+    port: "{{ item.port }}/{{ item.protocol }}"
+    state: "{{ item.state }}"
+    zone: "{{ item.zone }}"
+  with_items:
+    "{{ firewalld_entries }}"
+
