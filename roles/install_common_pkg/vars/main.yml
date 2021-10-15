@@ -1,7 +1,8 @@
 common_packages:
-  - traceroute
   - vim
 CentOS_packages:
+  - traceroute
   - nc
   - unzip
 Ubuntu_packages:
+  - traceroute

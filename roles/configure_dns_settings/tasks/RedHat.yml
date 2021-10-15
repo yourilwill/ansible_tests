@@ -1,16 +1,26 @@
-- name: install EPEL 
+- name: install EPEL
   yum:
     name: epel-release
 
-- name: install httpd
-  yum:
-    name: httpd
-    state: present
-  become: true
-
-- name: run httpd
-  systemd:
-    name: httpd
-    state: started
+- name: disable DNS settings in Network Manager.
+  template:
+    src: centos.NetworkManager.conf.j2
+    dest: /etc/NetworkManager/NetworkManager.conf
+    mode: '0644'
+    owner: root
+    group: root
+    backup: yes
   notify:
-    - Restart httpd
+    - Restart NetworkManager
+
+- name: configure DNS settings of /etc/resolv.conf
+  template:
+    src: centos.resolv.conf.j2
+    dest: /etc/resolv.conf
+    mode: '0644'
+    owner: root
+    group: root
+    backup: yes
+    #  notify:
+    #    - Restart NetworkManager
+
