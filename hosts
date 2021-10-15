@@ -1,6 +1,10 @@
 [centos:children]
 centos7
 
+[redhat:children]
+redhat7
+redhat8
+
 [ubuntu:children]
 ubuntu18
 ubuntu20
@@ -12,6 +16,12 @@ mysql8003
 mysql8011
 mysql8012
 mysql8013
+
+[redhat7]
+rhel0701
+
+[redhat8]
+rhel0801
 
 [mysql80:children]
 mysql80_source
@@ -39,11 +49,15 @@ dbmon01
 192.168.33.21 #dns
 
 [zabbix_agent]
-target2
-target
+192.168.33.21 #dns
+dbmon01
 mysql8001
 mysql8002
 mysql8003
 mysql8011
 mysql8012
 mysql8013
+rhel0701
+rhel0801
+target
+target2
