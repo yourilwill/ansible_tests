@@ -7,7 +7,7 @@
     name: "{{ zabbix_rpm }}"
 
 - name: install zabbix-agent
-  yum: 
+  yum:
     name: zabbix-agent
     enablerepo: zabbix
     update_cache: true
