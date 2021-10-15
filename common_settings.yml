@@ -1,15 +1,7 @@
 - hosts: all
   become: yes
-  tasks:
-    - name: Set timezone to Asia/Tokyo
-      timezone:
-        name: Asia/Tokyo
-    - name: execute roles
-      include_role:
-        name: "{{ role }}"
-      loop:
-        - configure_dns_settings
-        - disable_selinux
-        - install_common_pkg
-      loop_control:
-        loop_var: role
+  roles:
+    - timezone
+    - configure_dns_settings
+    - { role: disable_selinux, when: 'ansible_distribution in ("RedHat", "CentOS")' }
+    - install_common_pkg

@@ -7,3 +7,4 @@
 - name: check whether reboot needed.
   debug:
     var: selinux_result.reboot_required
+
