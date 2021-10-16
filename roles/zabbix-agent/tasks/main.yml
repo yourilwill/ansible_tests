@@ -1,6 +1,11 @@
 - name: install zabbix-agent
   include_tasks: "{{ ansible_os_family }}.yml"
 
+- name: Enable service zabbix-agent, and not touch the state
+  service:
+    name: zabbix-agent
+    enabled: yes
+
 - name: transfer zabbix config file
   template:
     src: zabbix_agentd.conf.j2

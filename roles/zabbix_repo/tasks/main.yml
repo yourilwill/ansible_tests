@@ -1,3 +1,15 @@
+- name: install apt key
+  apt_key:
+    url: "https://repo.zabbix.com/zabbix-official-repo.key"
+    keyring: "/etc/apt/trusted.gpg.d/zabbix-official-repo.gpg"
+  when: ansible_os_family == "Debian"
+
+- name: install apt repository
+  apt_repository:
+    repo: "deb {{ zabbix_repo_url[ansible_distribution] }} {{ ansible_distribution_release }} main"
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
 - name: install yum repository
   yum_repository:
     name: "{{ item.repo_name }}"

@@ -38,12 +38,13 @@ mysql8012
 mysql8013
 
 [ubuntu18]
-target2
 target
+ubuntu1801
 
 [ubuntu20]
-mail01
 dbmon01
+mail01
+ubuntu2001
 
 [unbound]
 192.168.33.21 #dns
@@ -61,3 +62,5 @@ rhel0701
 rhel0801
 target
 target2
+ubuntu1801
+ubuntu2001
