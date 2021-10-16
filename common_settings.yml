@@ -1,7 +1,7 @@
 - hosts: all
   become: yes
   roles:
+    - { role: disable_selinux, when: 'ansible_distribution in ("RedHat", "CentOS")' }
     - timezone
     - configure_dns_settings
-    - { role: disable_selinux, when: 'ansible_distribution in ("RedHat", "CentOS")' }
     - install_common_pkg
