@@ -1,7 +1,5 @@
-- include_vars: "{{ansible_distribution}}{{ansible_distribution_major_version}}.yml"
-
 - name: install zabbix-agent
-  include_tasks: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+  include_tasks: "{{ ansible_os_family }}.yml"
 
 - name: transfer zabbix config file
   template:

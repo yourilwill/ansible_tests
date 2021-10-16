@@ -1,0 +1,19 @@
+- name: install gpg key
+  get_url:
+    url: "{{ item.key }}"
+    dest: "{{ item.dest }}"
+  with_items: "{{ rpm_keys }}"
+  when: ansible_os_family == "RedHat"
+
+- name: install yum repository
+  yum_repository:
+    name: "{{ item.repo_name }}"
+    file: zabbix
+    description: "{{ item.repo_description | default('') }}"
+    baseurl: "{{ item.repo_url }}"
+      #repo_gpgcheck: yes
+    gpgkey: "{{ item.gpg_key }}"
+    gpgcheck: yes
+    enabled: no
+  with_items: "{{ zabbix_repos }}"
+  when: ansible_os_family == "RedHat"
