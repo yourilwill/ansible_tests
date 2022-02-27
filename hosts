@@ -10,6 +10,7 @@ ubuntu18
 ubuntu20
 
 [centos7]
+myrt8001
 mysql8001
 mysql8002
 mysql8003
@@ -26,6 +27,7 @@ rhel0801
 [mysql80:children]
 mysql80_source
 mysql80_replica
+mysql80_router
 
 [mysql80_source]
 mysql8001
@@ -36,6 +38,9 @@ mysql8002
 mysql8003
 mysql8012
 mysql8013
+
+[mysql80_router]
+myrt8001
 
 [ubuntu18]
 target
