@@ -4,7 +4,7 @@ mysql_user:
     password: "*6A7C9CB4AEA654747E474B8E076B6C89439D5103"
     encrypted: "yes"
     plugin: "mysql_native_password"
-    priv: "*.*:ALL,GRANT"
+    priv: "*.*:ALL,GRANT/:PROXY,GRANT"
     login_user: "root"
     login_password: "MySQL8.0"
     state: "present"
@@ -18,4 +18,3 @@ mysql_user:
     login_user: "root"
     login_password: "MySQL8.0"
     state: "present"
-
