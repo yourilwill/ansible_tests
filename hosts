@@ -1,3 +1,7 @@
+[rhel_family:children]
+centos
+redhat
+
 [centos:children]
 centos7
 
@@ -14,6 +18,7 @@ myrt8001
 mysql8001
 mysql8002
 mysql8003
+mysql8004
 mysql8011
 mysql8012
 mysql8013
@@ -36,6 +41,7 @@ mysql8011
 [mysql80_replica]
 mysql8002
 mysql8003
+mysql8004
 mysql8012
 mysql8013
 
@@ -62,6 +68,7 @@ dbmon01
 mysql8001
 mysql8002
 mysql8003
+mysql8004
 mysql8011
 mysql8012
 mysql8013

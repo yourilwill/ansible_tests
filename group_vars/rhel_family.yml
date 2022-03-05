@@ -1,0 +1,4 @@
+mysql80_repository: "https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm"
+mysql_libraries:
+    - MySQL-python
+    - mysql-shell

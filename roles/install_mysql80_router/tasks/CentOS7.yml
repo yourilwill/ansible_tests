@@ -1,0 +1,9 @@
+- name: add mysql8.0 repository
+  yum:
+    name: "{{ mysql80_repository }}"
+
+- name: install mysql router
+  yum:
+    name: mysql-router
+    update_cache: true
+    state: latest

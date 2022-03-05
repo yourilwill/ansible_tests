@@ -1,0 +1,5 @@
+- name: install MySQL Router for MySQL 8.0
+  hosts: mysql80_router
+  become: yes
+  roles:
+    - name: install_mysql80_router
