@@ -48,6 +48,9 @@ mysql8013
 [mysql80_router]
 myrt8001
 
+[ntp_server]
+ubuntu2001
+
 [ubuntu18]
 target
 ubuntu1801

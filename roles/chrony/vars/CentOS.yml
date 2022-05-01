@@ -1,0 +1,2 @@
+chrony_service: chronyd
+chrony_path: /etc

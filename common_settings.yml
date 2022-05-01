@@ -3,5 +3,6 @@
   roles:
     - { role: disable_selinux, when: 'ansible_distribution in ("RedHat", "CentOS")' }
     - timezone
+    - chrony
     - configure_dns_settings
     - install_common_pkg

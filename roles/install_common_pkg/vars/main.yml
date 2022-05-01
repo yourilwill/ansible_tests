@@ -1,8 +1,13 @@
 common_packages:
   - vim
+  - chrony
+common_uninstall_packages:
+  - iptables
 CentOS_packages:
   - traceroute
   - nc
   - unzip
 Ubuntu_packages:
   - traceroute
+CentOS_uninstall_packages:
+Ubuntu_uninstall_packages:

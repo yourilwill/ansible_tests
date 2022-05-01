@@ -1,12 +1,21 @@
 - name: install common packages
   package:
     name: "{{ item }}"
+    state: present
   with_items:
     - "{{ common_packages }}"
+
+- name: uninstall common packages
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ common_uninstall_packages }}"
 
 - name: install centos packages
   package:
     name: "{{ item }}"
+    state: present
   with_items:
     - "{{ CentOS_packages }}"
   when: ansible_distribution == "CentOS"
@@ -14,6 +23,23 @@
 - name: install ubuntu packages
   package:
     name: "{{ item }}"
+    state: present
   with_items:
     - "{{ Ubuntu_packages }}"
   when: ansible_distribution == "Ubuntu"
+
+- name: uninstall centos packages
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ CentOS_uninstall_packages }}"
+  when: ansible_distribution == "CentOS" and item is not none
+
+- name: uninstall ubuntu packages
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ Ubuntu_uninstall_packages }}"
+  when: ansible_distribution == "Ubuntu" and item is not none
